@@ -3,6 +3,7 @@ package br.com.interno.orders_api.controller;
 import br.com.interno.orders_api.dto.AddOrderItemRequest;
 import br.com.interno.orders_api.dto.CreateOrderRequest;
 import br.com.interno.orders_api.dto.OrderResponse;
+import br.com.interno.orders_api.dto.PageResponse;
 import br.com.interno.orders_api.mapper.OrderMapper;
 import br.com.interno.orders_api.model.Order;
 import br.com.interno.orders_api.model.OrderItem;
@@ -38,10 +39,12 @@ public class OrderController {
             description = "Retorna uma lista paginada de todos os pedidos"
     )
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de pedidos retornada com sucesso")
+            @ApiResponse(responseCode = "200", description = "Lista de pedidos retornada com sucesso",
+                    content = @Content(schema = @Schema(implementation = PageResponse.class)))
     })
-    public Page<Order> list(@ParameterObject Pageable pageable) {
-        return orderService.findAll(pageable);
+    public PageResponse<Order> list(@ParameterObject Pageable pageable) {
+        Page<Order> page = orderService.findAll(pageable);
+        return PageResponse.from(page);
     }
 
     @GetMapping("/{id}")
