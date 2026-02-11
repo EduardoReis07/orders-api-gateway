@@ -60,7 +60,8 @@ class OrderControllerTest {
     @Test
     void shouldListOrdersWithPagination() throws Exception {
         List<Order> orders = List.of(createOrder(1L), createOrder(2L));
-        Page<Order> page = new PageImpl<>(orders);
+        Pageable pageable = org.springframework.data.domain.PageRequest.of(0, 10);
+        Page<Order> page = new PageImpl<>(orders, pageable, orders.size());
 
         when(orderService.findAll(any(Pageable.class)))
                 .thenReturn(page);
