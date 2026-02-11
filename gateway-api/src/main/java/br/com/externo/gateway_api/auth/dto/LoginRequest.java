@@ -8,11 +8,19 @@ import lombok.Data;
 @Data
 public class LoginRequest {
 
-    @Schema(example = "usuario")
-    @NotBlank
+    @Schema(
+            description = "Nome de usuário para autenticação",
+            example = "usuario",
+            requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotBlank(message = "O nome de usuário é obrigatório")
     private String username;
 
-    @Schema(example = "senha123")
-    @NotBlank
+    @Schema(
+            description = "Senha do usuário",
+            example = "senha123",
+            requiredMode = Schema.RequiredMode.REQUIRED
+    )
+    @NotBlank(message = "A senha é obrigatória")
     private String password;
 }

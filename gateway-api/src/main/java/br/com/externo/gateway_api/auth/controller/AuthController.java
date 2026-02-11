@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Tag(name = "Authentication", description = "Endpoints de autenticação")
+@Tag(name = "Autenticação", description = "Endpoints para autenticação e geração de token JWT")
 @RestController
 @RequestMapping("/auth")
 @RequiredArgsConstructor
